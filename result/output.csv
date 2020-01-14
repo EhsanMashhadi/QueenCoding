@@ -1,0 +1,77 @@
+"Type","Priority","Affect Versions","Components","Labels","Patch Info","Estimated Complexity","Status","Resolution","Fix Version","Assignee","Reporter","Votes","Watchers","Created","Created Epoch","Updated","Updated Epoch","Resolved","Resolved Epoch","q2.Description","Comments"
+"Bug","Minor","2.18.0","camel-swagger","None","Patch Available","Unknown","Resolved","Fixed","2.17.5, 2.18.2, 2.19.0","Claus Ibsen","Bob Paulin","0","4","2016-12-14T14:42:08+0000","1481726528000","2016-12-15T14:26:13+0000","1481811973000","2016-12-14T15:31:58+0000","1481729518000","Assume I have rest path
+
+
+rest(""/test"").get().type(ClassA.class).to(""direct:someRoute"");
+
+rest(""/testSub"").get().type(ClassB.class).to(""direct:someOtherRoute"");
+
+
+
+And in the type ClassA contains a reference to ClassB.
+
+Within the Swagger Doc the path for ClassA renders as expected:
+
+/test:
+    get:
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/ClassA'
+
+
+
+However ClassB gets a string parameter scheme
+
+ 
+/testSub:
+    get:
+      responses:
+        200:
+          schema:
+             type : 'string'
+             format : 'com.ClassB'
+
+
+
+However I'd expect it to be:
+
+/testSub:
+    get:
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/ClassB'
+
+","githubbot:1481727356000:14/Dec/16 14:55:GitHub user bobpaulin opened a pull request:
+
+    https://github.com/apache/camel/pull/1348
+
+    CAMEL-10597 - Allow addition of x-className to empty VendorExtensions
+
+
+
+You can merge this pull request into a Git repository by running:
+
+    $ git pull https://github.com/bobpaulin/camel CAMEL-10597
+
+Alternatively you can review and apply these changes as the patch at:
+
+    https://github.com/apache/camel/pull/1348.patch
+
+To close this pull request, make a commit to your master/trunk branch
+with (at least) the following in the commit message:
+
+    This closes #1348
+
+
+
+
+bobpaulin:1481727366000:14/Dec/16 14:56:PR included https://github.com/apache/camel/pull/1348
+davsclaus:1481729518000:14/Dec/16 15:31:Thanks for the PR
+githubbot:1481729644000:14/Dec/16 15:34:Github user bobpaulin closed the pull request at:
+
+    https://github.com/apache/camel/pull/1348
+ancosen:1481810725000:15/Dec/16 14:05:2.17.x is affected too Claus Ibsen
+davsclaus:1481811973000:15/Dec/16 14:26:Thanks its backported now
+"
